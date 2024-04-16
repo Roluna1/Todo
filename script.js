@@ -1,11 +1,13 @@
+const todos = JSON.parse(localStorage.getItem('todos')) || [];
 const addTodoButton = document.querySelector('.add-todo-button');
 const todoContainer = document.querySelector('.todo-container');
 const completeContainer = document.querySelector('.complete-todo-container');
 
 // adding TODO button rawr
 addTodoButton.addEventListener('click', () => {
+  const todo = {};
   console.log('added');
-
+  
   const inputTodoContent = document.createElement('div');
   inputTodoContent.classList.add('todo-content');
 
@@ -57,9 +59,8 @@ addTodoButton.addEventListener('click', () => {
   inputTodoContent.appendChild(selectOption);
   inputTodoContent.appendChild(checkButton);
   todoContainer.appendChild(inputTodoContent);
-  
-  inputTodoText.focus();
 
+  inputTodoText.focus();
   const selectingCategory = inputTodoContent.querySelector('.selecting-category');
   selectingCategory.addEventListener('change', () => {
     const selectedCategory = selectingCategory.value;
@@ -84,13 +85,17 @@ addTodoButton.addEventListener('click', () => {
         break;       
     }
   });
-  
   inputTodoText.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
       inputTodoText.setAttribute('readonly', 'readonly')
       selectingCategory.remove()
       checkButton.remove()
       inputTodoCheckbox.disabled = false;
+      todo.text = inputTodoText.value;
+      todo.category = selectingCategory.value;
+      todos.push(todo);
+      console.log(todo);
+      localStorage.setItem('todos', JSON.stringify(todos))
     }
   });
   checkButton.addEventListener('click', () => {
@@ -98,6 +103,51 @@ addTodoButton.addEventListener('click', () => {
       selectingCategory.remove()
       checkButton.remove()
       inputTodoCheckbox.disabled = false;
+      todo.text = inputTodoText.value;
+      todo.category = selectingCategory.value;
+      todos.push(todo);
+      console.log(todo);
+      localStorage.setItem('todos', JSON.stringify(todos))
+
+  inputTodoCheckbox.addEventListener('change', () => {
+    if (inputTodoCheckbox.checked) {
+      inputTodoText.classList.add('line');
+      completeContainer.appendChild(inputTodoContent);
+    } else {
+      inputTodoText.classList.remove('line');
+      todoContainer.appendChild(inputTodoContent); 
+    }
+  });
+});
+});
+function renderTodos() {
+  let html = '';
+  let color = '';
+  todos.forEach((todo) => {
+    if (todo.category == 'School') {
+      color = '#FF6763';
+    } else if (todo.category == 'Work') {
+      color = '#FFB248';
+    } else if (todo.category == 'Personal') {
+      color = '#e6e635';
+    } else if (todo.category == 'Shopping') {
+      color = '#99E79B';
+    }
+    const inputTodoContent = document.createElement('div');
+    inputTodoContent.classList.add('todo-content');
+    inputTodoContent.style.backgroundColor = color;
+
+    const inputTodoCheckbox = document.createElement('input')
+    inputTodoCheckbox.type = 'checkbox';
+    inputTodoCheckbox.classList.add('input-todo-checkbox');
+    inputTodoCheckbox.checked = false;
+
+    const inputTodoText = document.createElement('input');
+    inputTodoText.type = 'text';
+    inputTodoText.classList.add('input-todo-text');
+    inputTodoText.value = todo.text;
+    inputTodoText.style.backgroundColor = color;
+    inputTodoText.readOnly = true;
 
     inputTodoCheckbox.addEventListener('change', () => {
       if (inputTodoCheckbox.checked) {
@@ -108,5 +158,13 @@ addTodoButton.addEventListener('click', () => {
         todoContainer.appendChild(inputTodoContent); 
       }
     });
+
+    inputTodoContent.appendChild(inputTodoCheckbox);
+    inputTodoContent.appendChild(inputTodoText);
+    todoContainer.appendChild(inputTodoContent);
+
+    html += inputTodoContent.outerHTML;
+    console.log(todos);
   });
-});
+}
+renderTodos()
