@@ -147,6 +147,7 @@ input[type="checkbox"]:checked {
   flex: 1;
 }
 .selecting-category{
+  width: calc(100% - 362px);
   height: 100%;
   border: none;
   outline: none;
