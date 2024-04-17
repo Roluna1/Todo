@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>To-Do</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
   <div class="container">
@@ -27,10 +27,11 @@
       </div>
       <div class="todo-container">
         <!--
-        <div class="todo-content">
+      <div class="todo-content">
           <input class="input-todo-checkbox" type="checkbox">
           <input class="input-todo-text" type="text">
           <select value="Select Category" class="selecting-category">
+            <option value="select" selected="true" disabled="true">Select</option>
             <option class="school" value="school">School</option>
             <option class="work" value="work">Work</option>
             <option class="personal" value="personal">Personal</option>
@@ -39,6 +40,7 @@
           <button class="check-button">&#10004</button>
         </div>
         -->
+  
       </div>
       <div class="complete-section-container">
         <div class="complete-section">
@@ -52,6 +54,6 @@
       <button class="add-todo-button">+</button>
     </div>
   </div>
-  <script src="script.js"></script>
+  <script type="module" src="/script/app.js"></script>
 </body>
 </html>
