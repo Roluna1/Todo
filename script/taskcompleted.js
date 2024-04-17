@@ -1,4 +1,4 @@
-import { todosCompleted, todos , saveStorage } from "./todo.js";
+import { todosCompleted, saveStorage } from "./todo.js";
 import { tasks } from "./task.js"
 export function taskCompleted() {
 let completedHTML = '';
