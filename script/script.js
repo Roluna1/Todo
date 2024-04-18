@@ -90,7 +90,6 @@ addButtonTask.addEventListener('click', () => {
           break;       
       }
     });
-  
 const checkButtons = document.querySelectorAll('.check-button');
 checkButtons.forEach((button) => {
   let maxId;
@@ -102,7 +101,6 @@ checkButtons.forEach((button) => {
   let nextId = maxId;
     button.addEventListener('click', () => {
     console.log('nyeks');
-
     if (!inputTodoText.value) {
         alert('Please put something');
     } else {
