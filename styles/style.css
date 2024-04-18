@@ -118,7 +118,7 @@ body{
   margin-top: .6rem;
   gap: 10px;
 }
-.todo-content, .compelete-todo-content{
+.todo-content, .compelete-todo-content, .todo-content1{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -128,7 +128,7 @@ body{
   border-radius: 10px;
   transition: .7s;
 }
-.input-todo-checkbox{
+.input-todo-checkbox, .input-todo-checkbox1{
   width: 25px;
   margin-left: 10px;
   margin-right: 8px;
@@ -149,7 +149,7 @@ input[type="checkbox"]:checked {
   background-color: var(--primary-color-font);
   border-color: var(--primary-color-font);
 }
-.input-todo-text{
+.input-todo-text, .input-todo-text1{
   width: 100%;
   color: var(--primary-color-font);
   font-size: 15px;
@@ -235,7 +235,7 @@ select {
   appearance: none;
   color: rgb(92, 91, 91);
 }
-.edit-button, .delete-button {
+.edit-button, .delete-button, .delete-button1 {
   height: 25px;
   border: none;
   background: none;
@@ -248,7 +248,7 @@ select {
 .edit-button{
   position: relative;
 }
-.edit-icon, .delete-icon, .save-icon {
+.edit-icon, .delete-icon, .save-icon, .delete-icon1 {
   height: 20px;
 }
 @media only screen and (max-width: 392px) {

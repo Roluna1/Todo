@@ -1,4 +1,4 @@
-import { todosCompleted, saveStorage } from "./todo.js";
+import { todosCompleted, saveStorage, todos } from "./todo.js";
 import { tasks } from "./task.js";
 
 export function taskCompleted() {
@@ -20,17 +20,17 @@ export function taskCompleted() {
     }
 
     completedHTML += `
-    <div class="todo-content" style="background-color: ${color};">
-      <input class="input-todo-checkbox" type="checkbox" disabled checked>
-      <input class="input-todo-text line" type="text" value="${task.text}" style="background-color: ${color};"readonly>
-      <button class="delete-button" data-todo-id="${task.id}"><img src="img/delete.png" class="delete-icon"></button>
+    <div class="todo-content1" style="background-color: ${color};">
+      <input class="input-todo-checkbox1" type="checkbox" data-input-check="${task.id}" checked>
+      <input class="input-todo-text1 line" type="text" value="${task.text}" style="background-color: ${color};"readonly>
+      <button class="delete-button1" data-todo-id="${task.id}"><img src="img/delete.png" class="delete-icon1"></button>
      </div>
     `;
   });
   
   document.querySelector('.complete-todo-container').innerHTML = completedHTML;
 
-  const deleteButtons = document.querySelectorAll('.delete-button');
+  const deleteButtons = document.querySelectorAll('.delete-button1');
   deleteButtons.forEach((button) => {
     addTodo.disabled = false;
     addTodo.style.opacity = '1';
@@ -40,10 +40,30 @@ export function taskCompleted() {
       if (index !== -1) {
         todosCompleted.splice(index, 1);
         saveStorage();
-        event.currentTarget.closest('.todo-content').remove();
+        event.currentTarget.closest('.todo-content1').remove();
         tasks();
         taskCompleted();
       }
     });
+  });
+  const InputCheck = document.querySelectorAll('.input-todo-checkbox1');
+  InputCheck.forEach((check) => { 
+    check.addEventListener('change', (event) => {
+      const taskId = event.target.getAttribute('data-input-check');
+      const todo = todosCompleted.find(task => task.id === parseInt(taskId));
+      if (todo) {
+        todos.push(todo);
+        taskCompleted();
+        tasks();
+        saveStorage();
+        const index = todosCompleted.findIndex(task => task.id === parseInt(taskId));
+        if (index !== -1) {
+          todosCompleted.splice(index, 1);
+        }
+        saveStorage();
+        taskCompleted();
+        tasks();
+      }
+    }); 
   });
 }

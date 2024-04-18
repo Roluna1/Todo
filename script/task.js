@@ -2,7 +2,7 @@ import { todos, todosCompleted, saveStorage } from "./todo.js";
 import { taskCompleted } from "./taskcompleted.js"
 export function tasks() {
   let taskHTML = '';
-
+// pakyu javascript .|.
   todos.forEach((task) => {
     let color = '';
     if (task.category === 'School') {
@@ -68,13 +68,13 @@ export function tasks() {
       const taskId = event.currentTarget.getAttribute('data-todo-id');
       const taskInput = document.querySelector(`.input-todo-text[data-input-check="${taskId}"]`);
       if (taskInput.hasAttribute('readonly')) {
-        // Enable editing mode
+        // editing
         taskInput.removeAttribute('readonly');
         taskInput.focus();
         taskInput.setSelectionRange(taskInput.value.length, taskInput.value.length);
         button.innerHTML = '<img src="img/save.png" class="save-icon">';
       } else {
-        // Save the edited text
+        // saving
         const newText = taskInput.value;
         const taskIndex = todos.findIndex(task => task.id === Number(taskId));
         if (taskIndex !== -1) {

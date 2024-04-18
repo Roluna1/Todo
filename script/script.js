@@ -6,6 +6,7 @@ import { todos } from "./todo.js"
 tasks();
 taskCompleted();
 
+// pakyu javascript .|.
 
 const addButtonTask = document.querySelector('.add-todo-button');
 addButtonTask.addEventListener('click', () => {
@@ -114,7 +115,7 @@ checkButtons.forEach((button) => {
     //console.log(uniqueID)
     localStorage.setItem('todos', JSON.stringify(todos));
     tasks();
-    taskCompleted()
+    taskCompleted();
     addButtonTask.disabled = false;
     addButtonTask.style.opacity = '1';
     }
