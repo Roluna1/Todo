@@ -9,7 +9,9 @@ taskCompleted();
 
 const addButtonTask = document.querySelector('.add-todo-button');
 addButtonTask.addEventListener('click', () => {
-  const todoContainer = document.querySelector('.todo-container')
+    addButtonTask.disabled = true;
+    addButtonTask.style.opacity = '.5';
+    const todoContainer = document.querySelector('.todo-container')
 
     const inputTodoContent = document.createElement('div');
     inputTodoContent.classList.add('todo-content');
@@ -63,6 +65,7 @@ addButtonTask.addEventListener('click', () => {
     inputTodoContent.appendChild(checkButton);
     todoContainer.appendChild(inputTodoContent);
     inputTodoText.focus();
+
     const selectingCategory = inputTodoContent.querySelector('.selecting-category');
     selectingCategory.addEventListener('change', () => {
       const selectedCategory = selectingCategory.value;
@@ -87,6 +90,7 @@ addButtonTask.addEventListener('click', () => {
           break;       
       }
     });
+  
 const checkButtons = document.querySelectorAll('.check-button');
 checkButtons.forEach((button) => {
   let maxId;
@@ -113,6 +117,8 @@ checkButtons.forEach((button) => {
     localStorage.setItem('todos', JSON.stringify(todos));
     tasks();
     taskCompleted()
+    addButtonTask.disabled = false;
+    addButtonTask.style.opacity = '1';
     }
     });
 });
