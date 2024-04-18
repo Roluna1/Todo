@@ -24,6 +24,9 @@ addButtonTask.addEventListener('click', () => {
     const inputTodoText = document.createElement('input');
     inputTodoText.type = 'text';
     inputTodoText.classList.add('input-todo-text');
+
+    const selectOptionContainer = document.createElement('div');
+    selectOptionContainer.classList.add('select-option-category');
   
     const selectOption = document.createElement('select');
     selectOption.classList.add('selecting-category');
@@ -61,7 +64,8 @@ addButtonTask.addEventListener('click', () => {
     selectOption.appendChild(workOption);
     selectOption.appendChild(personalOption);
     selectOption.appendChild(shoppingOption);
-    inputTodoContent.appendChild(selectOption);
+    selectOptionContainer.appendChild(selectOption);
+    inputTodoContent.appendChild(selectOptionContainer);
     inputTodoContent.appendChild(checkButton);
     todoContainer.appendChild(inputTodoContent);
     inputTodoText.focus();
