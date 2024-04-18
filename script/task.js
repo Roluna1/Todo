@@ -19,7 +19,7 @@ export function tasks() {
     taskHTML += `
     <div class="todo-content" style="background-color:${color};">
       <input class="input-todo-checkbox" type="checkbox" data-input-check="${task.id}">
-      <input class="input-todo-text" type="text" value="${task.text}" style="background-color: ${color};" readonly>
+      <input class="input-todo-text" data-input-check="${task.id}" type="text" value="${task.text}" style="background-color: ${color};" readonly>
       <button class="edit-button" data-todo-id="${task.id}"><img src="img/edit.png" class="edit-icon"></button>
       <button class="delete-button" data-todo-id="${task.id}"><img src="img/delete.png" class="delete-icon"></button>
     </div>
@@ -52,13 +52,37 @@ export function tasks() {
   deleteButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
           const taskId = event.currentTarget.getAttribute('data-todo-id');
-          const index = todos.findIndex(task => task.id === parseInt(taskId));
+          const index = todos.findIndex(task => task.id === Number(taskId));
           if (index !== -1) {
               todos.splice(index, 1);
               saveStorage();
               tasks();
           }
       });
+  });
+  const editButtons = document.querySelectorAll('.edit-button');
+  editButtons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+      const taskId = event.currentTarget.getAttribute('data-todo-id');
+      const taskInput = document.querySelector(`.input-todo-text[data-input-check="${taskId}"]`);
+      if (taskInput.hasAttribute('readonly')) {
+        // Enable editing mode
+        taskInput.removeAttribute('readonly');
+        taskInput.focus();
+        taskInput.setSelectionRange(taskInput.value.length, taskInput.value.length);
+        button.innerHTML = '<img src="img/save.png" class="save-icon">';
+      } else {
+        // Save the edited text
+        const newText = taskInput.value;
+        const taskIndex = todos.findIndex(task => task.id === Number(taskId));
+        if (taskIndex !== -1) {
+          todos[taskIndex].text = newText;
+          taskInput.setAttribute('readonly', true);
+          saveStorage();
+          button.innerHTML = '<img src="img/edit.png" class="edit-icon">';
+        }
+      }
+    });
   });
   return todosCompleted;
 };

@@ -1,12 +1,13 @@
 import { tasks } from "./task.js"
 import { taskCompleted } from "./taskcompleted.js"
 import { todos, todosCompleted } from "./todo.js"
+
+
 tasks();
 taskCompleted();
 
 
 const addButtonTask = document.querySelector('.add-todo-button');
-let addTodo = {};
 addButtonTask.addEventListener('click', () => {
   const todoContainer = document.querySelector('.todo-container')
 
@@ -86,10 +87,7 @@ addButtonTask.addEventListener('click', () => {
           break;       
       }
     });
-
-
 const checkButtons = document.querySelectorAll('.check-button');
-
 checkButtons.forEach((button) => {
   let maxId;
   if (todos.length > 0) {
@@ -99,26 +97,25 @@ checkButtons.forEach((button) => {
   }
   let nextId = maxId;
     button.addEventListener('click', () => {
-        console.log('nyeks');
+    console.log('nyeks');
 
-        if (!inputTodoText.value) {
-            alert('Please put something');
-        } else {
-            const addTodo = {
-                id: nextId,
-                text: inputTodoText.value,
-                category: selectOption.value
-            };
-            todos.push(addTodo);
-            console.log(addTodo);
-            console.log(todos);
-            localStorage.setItem('todos', JSON.stringify(todos));
-            tasks();
-            taskCompleted()
-        }
+    if (!inputTodoText.value) {
+        alert('Please put something');
+    } else {
+    const addTodo = {
+        id: nextId,
+        text: inputTodoText.value,
+        category: selectOption.value
+    };
+    todos.push(addTodo);
+    console.log(addTodo);
+    console.log(todos);
+    localStorage.setItem('todos', JSON.stringify(todos));
+    tasks();
+    taskCompleted()
+    }
     });
 });
-
 });
 console.log(todos);
 console.log(todosCompleted);
