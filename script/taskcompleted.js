@@ -2,6 +2,7 @@ import { todosCompleted, saveStorage } from "./todo.js";
 import { tasks } from "./task.js";
 
 export function taskCompleted() {
+  const addTodo = document.querySelector('.add-todo-button');
   let completedHTML = '';
 
   todosCompleted.forEach((task) => {
@@ -17,6 +18,7 @@ export function taskCompleted() {
     } else {
       color = '#ffffff';
     }
+
     completedHTML += `
     <div class="todo-content" style="background-color: ${color};">
       <input class="input-todo-checkbox" type="checkbox" disabled checked>
@@ -30,6 +32,8 @@ export function taskCompleted() {
 
   const deleteButtons = document.querySelectorAll('.delete-button');
   deleteButtons.forEach((button) => {
+    addTodo.disabled = false;
+    addTodo.style.opacity = '1';
     button.addEventListener('click', (event) => {
       const taskId = event.currentTarget.getAttribute('data-todo-id');
       const index = todosCompleted.findIndex(task => task.id === parseInt(taskId));

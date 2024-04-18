@@ -1,6 +1,6 @@
 import { tasks } from "./task.js"
 import { taskCompleted } from "./taskcompleted.js"
-import { todos, todosCompleted } from "./todo.js"
+import { todos } from "./todo.js"
 
 
 tasks();
@@ -90,28 +90,24 @@ addButtonTask.addEventListener('click', () => {
           break;       
       }
     });
+  
 const checkButtons = document.querySelectorAll('.check-button');
 checkButtons.forEach((button) => {
-  let maxId;
-  if (todos.length > 0) {
-      maxId = Math.max(...todos.map(todo => todo.id)) + 1;
-  } else {
-      maxId = 1;
-  }
-  let nextId = maxId;
     button.addEventListener('click', () => {
-    console.log('nyeks');
+
     if (!inputTodoText.value) {
         alert('Please put something');
     } else {
+      let uniqueID = Math.floor(Math.random() * 1000000000000000000000);
     const addTodo = {
-        id: nextId,
+        id: uniqueID,
         text: inputTodoText.value,
         category: selectOption.value
     };
     todos.push(addTodo);
-    console.log(addTodo);
-    console.log(todos);
+    //console.log(addTodo);
+    //console.log(todos);
+    //console.log(uniqueID)
     localStorage.setItem('todos', JSON.stringify(todos));
     tasks();
     taskCompleted()
@@ -121,5 +117,5 @@ checkButtons.forEach((button) => {
     });
 });
 });
-console.log(todos);
-console.log(todosCompleted);
+//console.log(todos);
+//console.log(todosCompleted);

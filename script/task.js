@@ -27,7 +27,7 @@ export function tasks() {
   });
 
   document.querySelector('.todo-container').innerHTML = taskHTML;
-
+  const addTodo = document.querySelector('.add-todo-button');
   const InputCheck = document.querySelectorAll('.input-todo-checkbox');
   InputCheck.forEach((check) => { 
     check.addEventListener('change', (event) => {
@@ -51,6 +51,8 @@ export function tasks() {
   const deleteButtons = document.querySelectorAll('.delete-button');
   deleteButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
+        addTodo.disabled = false;
+        addTodo.style.opacity = '1';
           const taskId = event.currentTarget.getAttribute('data-todo-id');
           const index = todos.findIndex(task => task.id === Number(taskId));
           if (index !== -1) {
