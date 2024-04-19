@@ -5,19 +5,25 @@ export function tasks() {
 // pakyu javascript .|.
   todos.forEach((task) => {
     let color = '';
+    let category = '';
     if (task.category === 'School') {
       color = '#FF6763';
+      category = 'school'
     } else if (task.category === 'Work') {
       color = '#FFB248';
+      category = 'work'
     } else if (task.category === 'Personal') {
       color = '#e6e635';
+      category = 'personal'
     } else if (task.category === 'Shopping') {
       color = '#99E79B';
+      category = 'shopping'
     } else {
       color = '#ffffff';
+      category = 'none'
     }
     taskHTML += `
-    <div class="todo-content" style="background-color:${color};">
+    <div class="todo-content ${category}" id="${category}" style="background-color:${color};">
       <input class="input-todo-checkbox" type="checkbox" data-input-check="${task.id}">
       <input class="input-todo-text" data-input-check="${task.id}" type="text" value="${task.text}" style="background-color: ${color};" readonly>
       <button class="edit-button" data-todo-id="${task.id}"><img src="img/edit.png" class="edit-icon"></button>
@@ -27,7 +33,6 @@ export function tasks() {
   });
 
   document.querySelector('.todo-container').innerHTML = taskHTML;
-  const addTodo = document.querySelector('.add-todo-button');
   const InputCheck = document.querySelectorAll('.input-todo-checkbox');
   InputCheck.forEach((check) => { 
     check.addEventListener('change', (event) => {
@@ -51,17 +56,17 @@ export function tasks() {
   const deleteButtons = document.querySelectorAll('.delete-button');
   deleteButtons.forEach((button) => {
       button.addEventListener('click', (event) => {
-        addTodo.disabled = false;
-        addTodo.style.opacity = '1';
+          const container = event.currentTarget.closest('.todo-content');
           const taskId = event.currentTarget.getAttribute('data-todo-id');
           const index = todos.findIndex(task => task.id === Number(taskId));
           if (index !== -1) {
               todos.splice(index, 1);
               saveStorage();
-              tasks();
+              container.remove();
           }
       });
   });
+  /*
   const editButtons = document.querySelectorAll('.edit-button');
   editButtons.forEach((button) => {
     button.addEventListener('click', (event) => {
@@ -86,5 +91,43 @@ export function tasks() {
       }
     });
   });
-  return todosCompleted;
+  */
+  const editButtons = document.querySelectorAll('.edit-button');
+  editButtons.forEach((button) => {
+      button.addEventListener('click', (event) => {
+          const taskId = event.currentTarget.getAttribute('data-todo-id');
+          const taskInput = document.querySelector(`.input-todo-text[data-input-check="${taskId}"]`);
+          if (taskInput.hasAttribute('readonly')) {
+              // editing
+              taskInput.removeAttribute('readonly');
+              taskInput.focus();
+              taskInput.setSelectionRange(taskInput.value.length, taskInput.value.length);
+              button.innerHTML = '<img src="img/save.png" class="save-icon">';
+  
+              // Enter
+              taskInput.addEventListener('keypress', (event) => {
+                  if (event.key === 'Enter' || event.keyCode === 13 || event.which === 13) {
+                      saveTask(taskId, taskInput);
+                      button.innerHTML = '<img src="img/edit.png" class="edit-icon">';
+                  }
+              });
+          } else {
+              // saving
+              saveTask(taskId, taskInput, button);
+          }
+      });
+  });
+  
+  function saveTask(taskId, taskInput, button) {
+      const newText = taskInput.value;
+      const taskIndex = todos.findIndex(task => task.id === Number(taskId));
+      if (taskIndex !== -1) {
+          todos[taskIndex].text = newText;
+          taskInput.setAttribute('readonly', true);
+          saveStorage();
+          if (button) {
+              button.innerHTML = '<img src="img/edit.png" class="edit-icon">';
+          }
+      }
+  }
 };

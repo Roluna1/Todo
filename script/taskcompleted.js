@@ -7,20 +7,26 @@ export function taskCompleted() {
 
   todosCompleted.forEach((task) => {
     let color = '';
+    let category = '';
     if (task.category === 'School') {
       color = '#FF6763';
+      category = 'school'
     } else if (task.category === 'Work') {
       color = '#FFB248';
+      category = 'work'
     } else if (task.category === 'Personal') {
       color = '#e6e635';
+      category = 'personal'
     } else if (task.category === 'Shopping') {
       color = '#99E79B';
+      category = 'shopping'
     } else {
       color = '#ffffff';
+      category = 'none'
     }
 
     completedHTML += `
-    <div class="todo-content1" style="background-color: ${color};">
+    <div class="todo-content1 ${category}" id="${category}"style="background-color: ${color};">
       <input class="input-todo-checkbox1" type="checkbox" data-input-check="${task.id}" checked>
       <input class="input-todo-text1 line" type="text" value="${task.text}" style="background-color: ${color};"readonly>
       <button class="delete-button1" data-todo-id="${task.id}"><img src="img/delete.png" class="delete-icon1"></button>
@@ -35,14 +41,14 @@ export function taskCompleted() {
     addTodo.disabled = false;
     addTodo.style.opacity = '1';
     button.addEventListener('click', (event) => {
+      const container = event.currentTarget.closest('.todo-content1');
       const taskId = event.currentTarget.getAttribute('data-todo-id');
       const index = todosCompleted.findIndex(task => task.id === parseInt(taskId));
       if (index !== -1) {
         todosCompleted.splice(index, 1);
         saveStorage();
         event.currentTarget.closest('.todo-content1').remove();
-        tasks();
-        taskCompleted();
+        container.remove()
       }
     });
   });
@@ -56,6 +62,7 @@ export function taskCompleted() {
         taskCompleted();
         tasks();
         saveStorage();
+
         const index = todosCompleted.findIndex(task => task.id === parseInt(taskId));
         if (index !== -1) {
           todosCompleted.splice(index, 1);

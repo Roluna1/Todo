@@ -14,6 +14,9 @@
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
+body {
+  position: relative;
+}
 .top-section{
   display: flex;
   align-items: center;
@@ -55,15 +58,19 @@ body{
 .container{
   display: flex;
   flex-direction: column;
-  position: relative;
   background-color: #FFCDD6;
-  width: 100%;
+  width: 90%;
   max-width: 450px;
   height: 100%;
   min-height: 600px;
   padding: 25px 10px;
   border-radius: 10px;
   margin: 10px;
+  position: relative;
+}
+.content{
+  height: 100%;
+  min-height: 600px;
 }
 .all-task-section{
   display: flex;
@@ -74,36 +81,67 @@ body{
   margin-left: 5px;
   margin-top: -.5rem;
   color: var(--secondary-color-font);
+  cursor: pointer;
 }
 .arrow-2{
   color: var(--secondary-color-font);
   margin-left: 5px;
   margin-bottom: 6px;
 }
-.category-section{
+.category-container {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.category-section {
   display: flex;
   align-items: center;
   flex-direction: row;
   gap: 10px;
   margin-top: .4rem;
 }
-.school{
+.school {
   color: var(--school-color);
+  text-align: center;
 }
-.work{
+.work {
   color: var(--work--color);
+  text-align: center;
 }
-.personal{
+.personal {
   color: var(--personal-color);
+  text-align: center;
 }
-.shopping{
+.shopping {
   color: var(--shopping-color);
+  text-align: center;
 }
-.category-text{
+.category-text {
   color: var(--primary-color-font);
   font-weight: 700;
   cursor: pointer;
+  display: inline-block;
 }
+.category-container::-webkit-scrollbar {
+  width: 8px;
+  height: 5px;
+}
+
+.category-container::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+.category-container::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color-font);
+  border-radius: 100px; 
+
+}
+.category-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+.category-container::-webkit-scrollbar-thumb {
+  transition: background-color 0.3s;
+}
+
 .select-option-category{
   display: flex;
   align-items: center;
@@ -199,11 +237,11 @@ input[type="checkbox"]:checked {
   margin-top: 10px;
 }
 .add-todo-button-container{
-  position: absolute;
+  position: sticky;
   width: 50px;
   height: 50px;
-  bottom: 3%;
-  right: 5%;
+  left: 80%;
+  bottom: 20px;
   border-radius: 50%;
   display: flex;
   align-content: center;
@@ -239,20 +277,11 @@ select {
   height: 25px;
   border: none;
   background: none;
-  position: relative;
   cursor: pointer;
 }
 .edit-button:hover, .delete-button:hover{
   opacity: .5;
 }
-.edit-button{
-  position: relative;
-}
 .edit-icon, .delete-icon, .save-icon, .delete-icon1 {
   height: 20px;
-}
-@media only screen and (max-width: 392px) {
-  .category-text{
-    font-size: .95rem;
-  }
 }
