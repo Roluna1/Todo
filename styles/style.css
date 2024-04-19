@@ -87,6 +87,7 @@ body{
   color: var(--secondary-color-font);
   margin-left: 5px;
   margin-bottom: 6px;
+  cursor: pointer;
 }
 .category-container {
   width: 100%;

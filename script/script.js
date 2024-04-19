@@ -35,6 +35,7 @@ addButtonTask.addEventListener('click', () => {
     inputTodoText.type = 'text';
     inputTodoText.classList.add('input-todo-text');
     inputTodoText.setAttribute('data-input-text', 1);
+    inputTodoText.style.backgroundColor = '#ffffff';
 
     const selectOptionContainer = document.createElement('div');
     selectOptionContainer.classList.add('select-option-category');
@@ -134,6 +135,7 @@ const checkButtons = document.querySelectorAll('.check-button');
 checkButtons.forEach((button) => {
     button.addEventListener('click' , () => {
       addTodoList()
+      tasks();
     });
 });
   function addTodoList() {
@@ -155,8 +157,8 @@ checkButtons.forEach((button) => {
   addButtonTask.style.opacity = '1';
   selectOptionContainer.remove();
   checkButton.remove();
-  inputTodoText.setAttribute('readonly', true);
-  inputTodoText.setAttribute('data-input-check', `${uniqueID}`)
+  //inputTodoText.setAttribute('readonly', true);
+  //inputTodoText.setAttribute('data-input-check', `${uniqueID}`)
   // action buttons
   //addDeleteButton.style.display = 'flex';
   //addEditButton.style.display = 'flex';
