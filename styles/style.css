@@ -274,7 +274,7 @@ select {
   appearance: none;
   color: rgb(92, 91, 91);
 }
-.edit-button, .delete-button, .delete-button1 {
+.edit-button, .delete-button, .delete-button1, .edit-button1 {
   height: 25px;
   border: none;
   background: none;
@@ -285,4 +285,17 @@ select {
 }
 .edit-icon, .delete-icon, .save-icon, .delete-icon1 {
   height: 20px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color-font);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--line-color);
+}
+::-webkit-scrollbar-corner {
+  background-color: transparent;
 }
